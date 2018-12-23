@@ -1,32 +1,24 @@
-def code_int_to_string(first, second):
+def code_string_to_int(code_string):
+    [s1, s2] = code_string.split("-")
+    return int(s1+s2)
+
+
+def code_int_to_string(code_int):
+    first = int(code_int / 1000)
+    second = int(code_int % 1000)
     return "{:02}-{:03}".format(first, second)
 
 
-def codes_generator(str1, str2):
-    first_code_before_separator = int(str1.split("-")[0])
-    second_code_before_separator = int(str2.split("-")[0])
-    first_code_after_separator = int(str1.split("-")[1])
-    second_code_after_separator = int(str2.split("-")[1])
-    first_code = int(str1.split("-")[0]+str1.split("-")[1])
-    second_code = int(str2.split("-")[0]+str2.split("-")[1])
-
+def codes_generator(code1, code2):
+    first_code = code_string_to_int(code1)
+    second_code = code_string_to_int(code2)
     codes_list = []
     
     if (first_code > second_code):
-        print("podałeś złą kolejność")
+        print("podałeś złą kolejność kodów")
     else:
-        for i in range(first_code_before_separator, second_code_before_separator+1):
-            if i == first_code_before_separator:
-                for j in range(first_code_after_separator, 1000):
-
-                        codes_list.append(code_int_to_string(i, j))
-            elif i == second_code_before_separator:
-                for j in range(0, second_code_after_separator + 1):
-                    codes_list.append(code_int_to_string(i, j))
-            else:
-                for j in range(0, 1000):
-                    codes_list.append(code_int_to_string(i, j))
-
+        for i in range(first_code+1, second_code):
+            codes_list.append(code_int_to_string(i))
     return codes_list
 
 
