@@ -1,3 +1,7 @@
+def code_int_to_string(first, second):
+    return "{:02}-{:03}".format(first, second)
+
+
 def codes_generator(str1, str2):
     first_code_before_separator = int(str1.split("-")[0])
     second_code_before_separator = int(str2.split("-")[0])
@@ -13,33 +17,18 @@ def codes_generator(str1, str2):
     else:
         for i in range(first_code_before_separator, second_code_before_separator+1):
             if i == first_code_before_separator:
-                for j in range(first_code_after_separator, 999):
-                    if j < 10:
-                        codes_list.append(str(i)+"-"+"00"+str(j))
-                    elif j in range(10, 100):
-                        codes_list.append(str(i) + "-" + "0" + str(j))
-                    else:
-                        codes_list.append(str(i) + "-" + str(j))
+                for j in range(first_code_after_separator, 1000):
+
+                        codes_list.append(code_int_to_string(i, j))
             elif i == second_code_before_separator:
                 for j in range(0, second_code_after_separator + 1):
-                    if j < 10:
-                        codes_list.append(str(i)+"-"+"00"+str(j))
-                    elif j in range(10, 100):
-                        codes_list.append(str(i) + "-" + "0" + str(j))
-                    else:
-                        codes_list.append(str(i) + "-" + str(j))
+                    codes_list.append(code_int_to_string(i, j))
             else:
                 for j in range(0, 1000):
-                    if j < 10:
-                        codes_list.append(str(i)+"-"+"00"+str(j))
-                    elif j in range(10, 100):
-                        codes_list.append(str(i) + "-" + "0" + str(j))
-                    else:
-                        codes_list.append(str(i) + "-" + str(j))
+                    codes_list.append(code_int_to_string(i, j))
 
     return codes_list
 
 
-codes_list1 = codes_generator("79-900","80-155")
-for el in codes_list1:
-    print(el)
+if __name__ == "__main__":
+    print(codes_generator("79-900", "80-155"))
